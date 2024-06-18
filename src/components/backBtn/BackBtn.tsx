@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import style from "./backBtn.module.css";
 
 const BackBtn = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <button onClick={() => navigate(-1)}>Voltar</button>
+      <button className={style.back_btn} onClick={() => navigate(-1)}>
+        Voltar
+      </button>
     </>
   );
 };

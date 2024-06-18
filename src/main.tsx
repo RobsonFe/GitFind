@@ -6,7 +6,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./routes/home/Home";
-import Repo from "./routes/repo/Repo.tsx";
+import Repos from "./routes/repo/Repos.tsx";
 import { Provider } from "react-redux";
 import store from "./context/store/index.ts";
 
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/repos/:username",
-        element: <Repo />,
+        element: <Repos />,
       },
     ],
   },

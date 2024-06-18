@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import style from "./Repo.module.css";
 import BackBtn from "../../components/backBtn/BackBtn";
 import { RepoProps } from "../../types/repo";
 import Loader from "../../components/Loader/Loader";
 import Repo from "../../components/repositorios/Repo";
+import style from "./Repos.module.css";
 
 const Repos = () => {
   const { username } = useParams();
@@ -34,7 +34,7 @@ const Repos = () => {
   if (!repos && isLoading) return <Loader />;
 
   return (
-    <div>
+    <div className={style.repos}>
       <BackBtn />
       <h2>Repositórios do Usuário: {username}</h2>
       {repos && repos.length === 0 && (
@@ -43,7 +43,7 @@ const Repos = () => {
         </p>
       )}
       {repos && repos.length > 0 && (
-        <div>
+        <div className={style.reposContainer}>
           {repos.map((rep: RepoProps) => (
             <Repo key={rep.name} {...rep} />
           ))}
