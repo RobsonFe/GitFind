@@ -13,29 +13,42 @@ const Repos = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [perPage] = useState(10);
+
   useEffect(() => {
-    setIsLoading(true);
-
-    const loadRepos = async function (username: string) {
-      const res = await fetch(`https://api.github.com/users/${username}/repos`);
-
+    const loadRepos = async (username: string, page: number) => {
+      setIsLoading(true);
+      const res = await fetch(
+        `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`
+      );
       const data = await res.json();
 
-      setIsLoading(false);
-
-      let orderedRepos = data.sort(
+      //Ordenação de Objetos
+      const orderedRepos = data.sort(
         (a: RepoProps, b: RepoProps) => b.stargazers_count - a.stargazers_count
       );
 
-      orderedRepos = orderedRepos.slice(0, 10);
+      setIsLoading(false);
 
-      setRepos(orderedRepos);
+      if (page === 1) {
+        setRepos(orderedRepos);
+      } else {
+        setRepos((prevRepos) =>
+          prevRepos ? [...prevRepos, ...orderedRepos] : orderedRepos
+        );
+      }
     };
 
     if (username) {
-      loadRepos(username);
+      loadRepos(username, currentPage);
     }
-  }, []);
+  }, [username, currentPage]);
+
+  const loadMoreRepos = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   if (!repos && isLoading) return <Loader />;
 
@@ -54,6 +67,11 @@ const Repos = () => {
             <Repo key={rep.name} {...rep} />
           ))}
         </div>
+      )}
+      {repos && repos.length % perPage === 0 && (
+        <button onClick={loadMoreRepos} className={style.loadMoreBtn}>
+          Carregar mais
+        </button>
       )}
     </div>
   );
