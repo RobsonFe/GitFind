@@ -1,7 +1,8 @@
-import { MdBiotech, MdLocationPin } from "react-icons/md";
+import { MdLocationPin } from "react-icons/md";
 import { UserProps } from "../../types/user";
 import { Link } from "react-router-dom";
 import style from "./User.module.css";
+import { FaComputer } from "react-icons/fa6";
 
 const User = ({
   avatar_url,
@@ -25,7 +26,7 @@ const User = ({
       )}
       {bio && (
         <p className={style.location}>
-          <MdBiotech />
+          <FaComputer />
           {bio}
         </p>
       )}
@@ -39,7 +40,7 @@ const User = ({
           <p className={style.number}>{following}</p>
         </div>
       </div>
-      <Link to={`/repos/${login}`}>Ver Melhores Projetos</Link>
+      <Link to={`/repos/${login}`}>Ver Projetos</Link>
     </div>
   );
 };

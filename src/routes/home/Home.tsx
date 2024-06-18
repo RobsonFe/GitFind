@@ -1,22 +1,22 @@
+import { useDispatch } from "react-redux";
+import { openModal } from "../../context/store/modalSlice";
 import Search from "../../components/search/Search";
 import Loader from "../../components/Loader/Loader";
-import User from "../../components/user/User";
 import Error from "../../components/error/Error";
-import { useState } from "react";
+import UserModal from "../../components/modal/UserModal";
 import { UserProps } from "../../types/user";
+import { useState } from "react";
 
 const Home = () => {
-  const [user, setUser] = useState<UserProps | null>(null);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const loadUser = async (userName: string) => {
     setIsLoading(true);
     setError(false);
-    setUser(null);
 
     const res = await fetch(`https://api.github.com/users/${userName}`);
-
     const data = await res.json();
 
     setIsLoading(false);
@@ -39,15 +39,15 @@ const Home = () => {
       following,
     };
 
-    setUser(userData);
+    dispatch(openModal(userData));
   };
 
   return (
     <div>
       <Search loadUser={loadUser} />
       {isLoading && <Loader />}
-      {user && <User {...user} />}
       {error && <Error />}
+      <UserModal />
     </div>
   );
 };
