@@ -3,11 +3,11 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  color: #fff;
+  color: #f8f9fa;
 }
 
 body {
-  background-color: #333;
+  background-color: #212529;
 }
 
 p {
