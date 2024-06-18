@@ -1,8 +1,8 @@
 import { BsCodeSlash } from "react-icons/bs";
 import { RepoProps } from "../../types/repo";
 import { AiOutlineFork, AiOutlineStar } from "react-icons/ai";
-import { MdOutlineDescription } from "react-icons/md";
 import { RiGitRepositoryLine } from "react-icons/ri";
+import style from "./Repo.module.css";
 
 const Repo = ({
   name,
@@ -13,13 +13,13 @@ const Repo = ({
   forks_count,
 }: RepoProps) => {
   return (
-    <div>
+    <div className={style.repo}>
       <h3>{name}</h3>
-      <p>
+      <p className={style.language}>
         <BsCodeSlash />
-        {language}
+        <span>{language}</span>
       </p>
-      <div>
+      <div className={style.stats}>
         <div>
           <AiOutlineStar />
           <span>{stargazers_count}</span>
@@ -29,11 +29,10 @@ const Repo = ({
           <span>{forks_count}</span>
         </div>
       </div>
-      <div>
-        <MdOutlineDescription />
+      <div className={style.stats}>
         <h5>{description}</h5>
       </div>
-      <a href={html_url} target="_blank">
+      <a href={html_url} target="_blank" className={style.repoBtn}>
         <span>Ver Código</span>
         <RiGitRepositoryLine />
       </a>

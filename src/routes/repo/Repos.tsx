@@ -23,7 +23,13 @@ const Repos = () => {
 
       setIsLoading(false);
 
-      setRepos(data);
+      let orderedRepos = data.sort(
+        (a: RepoProps, b: RepoProps) => b.stargazers_count - a.stargazers_count
+      );
+
+      orderedRepos = orderedRepos.slice(0, 10);
+
+      setRepos(orderedRepos);
     };
 
     if (username) {
