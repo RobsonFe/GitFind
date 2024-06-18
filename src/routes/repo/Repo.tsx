@@ -4,8 +4,9 @@ import style from "./Repo.module.css";
 import BackBtn from "../../components/backBtn/BackBtn";
 import { RepoProps } from "../../types/repo";
 import Loader from "../../components/Loader/Loader";
+import Repo from "../../components/repositorios/Repo";
 
-const Repo = () => {
+const Repos = () => {
   const { username } = useParams();
 
   const [repos, setRepos] = useState<RepoProps[] | [] | null>(null);
@@ -44,7 +45,7 @@ const Repo = () => {
       {repos && repos.length > 0 && (
         <div>
           {repos.map((rep: RepoProps) => (
-            <p>{rep.name}</p>
+            <Repo key={rep.name} {...rep} />
           ))}
         </div>
       )}
@@ -52,4 +53,4 @@ const Repo = () => {
   );
 };
 
-export default Repo;
+export default Repos;
