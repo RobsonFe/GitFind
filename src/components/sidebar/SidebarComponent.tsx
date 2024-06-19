@@ -25,6 +25,24 @@ const SidebarComponent: React.FC = () => {
     setCollapsed(!collapsed);
   };
 
+  const menuItemStyles = {
+    button: ({ level, active }) => ({
+      backgroundColor: active ? "#0e1129" : undefined,
+      color: active ? "white" : undefined,
+      "&:hover": {
+        backgroundColor: "#1976D2",
+        color: "white",
+        textDecoration: "none",
+      },
+    }),
+    subMenuContent: {
+      backgroundColor: "#0e1129",
+    },
+    label: {
+      color: "white",
+    },
+  };
+
   return (
     <Sidebar
       collapsed={collapsed}
@@ -36,7 +54,7 @@ const SidebarComponent: React.FC = () => {
       }}
     >
       <div className={styles.menuContainer}>
-        <Menu>
+        <Menu menuItemStyles={menuItemStyles}>
           <MenuItem icon={<FaHome />}>
             <Link to="/">Home</Link>
           </MenuItem>
