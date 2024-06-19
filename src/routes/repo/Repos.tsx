@@ -11,7 +11,8 @@ import { GET_USER_REPOS } from "../../provider/queryList";
 const Repos = () => {
   const { username } = useParams<{ username: string }>();
   const [repos, setRepos] = useState<RepoProps[]>([]);
-  const perPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 2;
 
   const { data, loading, error, fetchMore } = useQuery(GET_USER_REPOS, {
     variables: { username, perPage, cursor: null },
@@ -25,28 +26,40 @@ const Repos = () => {
         stargazers_count: node.stargazers.totalCount,
         forks_count: node.forkCount,
       }));
-      setRepos((prevRepos) => [...prevRepos, ...newRepos]);
+      setRepos(newRepos);
     },
   });
 
   if (loading && !data) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
 
-  const loadMoreRepos = () => {
-    const { endCursor } = data.user.repositories.pageInfo;
+  const handlePageChange = (direction: string) => {
+    const { startCursor, endCursor } = data.user.repositories.pageInfo;
+    const cursor = direction === "next" ? endCursor : startCursor;
+
     fetchMore({
-      variables: { cursor: endCursor },
+      variables: { cursor },
       updateQuery: (prevResult, { fetchMoreResult }) => {
         const newEdges = fetchMoreResult.user.repositories.edges;
         const pageInfo = fetchMoreResult.user.repositories.pageInfo;
 
+        const updatedRepos = newEdges.map(({ node }: any) => ({
+          name: node.name,
+          html_url: node.url,
+          language: node.primaryLanguage?.name,
+          description: node.description,
+          stargazers_count: node.stargazers.totalCount,
+          forks_count: node.forkCount,
+        }));
+
+        setRepos(updatedRepos);
         return newEdges.length
           ? {
               user: {
                 ...prevResult.user,
                 repositories: {
                   ...prevResult.user.repositories,
-                  edges: [...prevResult.user.repositories.edges, ...newEdges],
+                  edges: newEdges,
                   pageInfo,
                 },
               },
@@ -54,6 +67,10 @@ const Repos = () => {
           : prevResult;
       },
     });
+
+    setCurrentPage((prevPage) =>
+      direction === "next" ? prevPage + 1 : prevPage - 1
+    );
   };
 
   return (
@@ -72,11 +89,22 @@ const Repos = () => {
           ))}
         </div>
       )}
-      {data.user.repositories.pageInfo.hasNextPage && (
-        <button onClick={loadMoreRepos} className={style.loadMoreBtn}>
-          Carregar mais
+      <div className={style.paginationButtons}>
+        <button
+          onClick={() => handlePageChange("prev")}
+          disabled={currentPage === 1}
+          className={style.pageBtn}
+        >
+          Página Anterior
         </button>
-      )}
+        <button
+          onClick={() => handlePageChange("next")}
+          disabled={!data.user.repositories.pageInfo.hasNextPage}
+          className={style.pageBtn}
+        >
+          Próxima Página
+        </button>
+      </div>
     </div>
   );
 };

@@ -28,3 +28,23 @@
 .loadMoreBtn:hover {
   opacity: 1;
 }
+
+.paginationButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pageBtn {
+  padding: 10px 20px;
+  background-color: #0e1129;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pageBtn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
