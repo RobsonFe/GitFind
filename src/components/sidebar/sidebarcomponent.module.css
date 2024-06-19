@@ -1,0 +1,18 @@
+.customSidebar {
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 250px;
+}
+
+.collapseButton {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #0e1129;
+  border-top: 1px solid #0e1129;
+  position: absolute;
+  bottom: 0;
+}

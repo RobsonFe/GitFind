@@ -9,6 +9,8 @@ import Home from "./routes/home/Home";
 import Repos from "./routes/repo/Repos.tsx";
 import { Provider } from "react-redux";
 import store from "./context/store/index.ts";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./provider/cliente.ts";
 
 const router = createBrowserRouter([
   {
@@ -29,10 +31,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );

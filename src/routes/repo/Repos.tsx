@@ -1,74 +1,78 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import BackBtn from "../../components/backBtn/BackBtn";
 import { RepoProps } from "../../types/repo";
 import Loader from "../../components/Loader/Loader";
 import Repo from "../../components/repositorios/Repo";
 import style from "./Repos.module.css";
+import { GET_USER_REPOS } from "../../provider/queryList";
 
 const Repos = () => {
-  const { username } = useParams();
+  const { username } = useParams<{ username: string }>();
+  const [repos, setRepos] = useState<RepoProps[]>([]);
+  const perPage = 10;
 
-  const [repos, setRepos] = useState<RepoProps[] | [] | null>(null);
+  const { data, loading, error, fetchMore } = useQuery(GET_USER_REPOS, {
+    variables: { username, perPage, cursor: null },
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data) => {
+      const newRepos = data.user.repositories.edges.map(({ node }: any) => ({
+        name: node.name,
+        html_url: node.url,
+        language: node.primaryLanguage?.name,
+        description: node.description,
+        stargazers_count: node.stargazers.totalCount,
+        forks_count: node.forkCount,
+      }));
+      setRepos((prevRepos) => [...prevRepos, ...newRepos]);
+    },
+  });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const [perPage] = useState(10);
-
-  useEffect(() => {
-    const loadRepos = async (username: string, page: number) => {
-      setIsLoading(true);
-      const res = await fetch(
-        `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`
-      );
-      const data = await res.json();
-
-      //Ordenação de Objetos
-      const orderedRepos = data.sort(
-        (a: RepoProps, b: RepoProps) => b.stargazers_count - a.stargazers_count
-      );
-
-      setIsLoading(false);
-
-      if (page === 1) {
-        setRepos(orderedRepos);
-      } else {
-        setRepos((prevRepos) =>
-          prevRepos ? [...prevRepos, ...orderedRepos] : orderedRepos
-        );
-      }
-    };
-
-    if (username) {
-      loadRepos(username, currentPage);
-    }
-  }, [username, currentPage]);
+  if (loading && !data) return <Loader />;
+  if (error) return <p>Error: {error.message}</p>;
 
   const loadMoreRepos = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+    const { endCursor } = data.user.repositories.pageInfo;
+    fetchMore({
+      variables: { cursor: endCursor },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        const newEdges = fetchMoreResult.user.repositories.edges;
+        const pageInfo = fetchMoreResult.user.repositories.pageInfo;
 
-  if (!repos && isLoading) return <Loader />;
+        return newEdges.length
+          ? {
+              user: {
+                ...prevResult.user,
+                repositories: {
+                  ...prevResult.user.repositories,
+                  edges: [...prevResult.user.repositories.edges, ...newEdges],
+                  pageInfo,
+                },
+              },
+            }
+          : prevResult;
+      },
+    });
+  };
 
   return (
     <div className={style.repos}>
       <BackBtn />
       <h2>Repositórios do Usuário: {username}</h2>
-      {repos && repos.length === 0 && (
+      {repos.length === 0 && (
         <p>
-          Usuário <strong>{username}</strong> Não Possui Repósitórios
+          Usuário <strong>{username}</strong> Não Possui Repositórios
         </p>
       )}
-      {repos && repos.length > 0 && (
+      {repos.length > 0 && (
         <div className={style.reposContainer}>
           {repos.map((rep: RepoProps) => (
             <Repo key={rep.name} {...rep} />
           ))}
         </div>
       )}
-      {repos && repos.length % perPage === 0 && (
+      {data.user.repositories.pageInfo.hasNextPage && (
         <button onClick={loadMoreRepos} className={style.loadMoreBtn}>
           Carregar mais
         </button>

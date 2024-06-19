@@ -1,11 +1,15 @@
 import { Outlet } from "react-router-dom";
 import style from "./App.module.css";
+import SidebarComponent from "./components/sidebar/SidebarComponent";
 
 function App() {
   return (
     <div className={style.app}>
-      <h1>GitHub Finder Repo</h1>
-      <Outlet />
+      <SidebarComponent />
+      <div className={style.content}>
+        <h1>GitHub Finder RepoSitory</h1>
+        <Outlet />
+      </div>
     </div>
   );
 }

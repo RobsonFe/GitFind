@@ -1,5 +1,5 @@
 .search {
-  background-color: #2b3566;
+  background-color: #0e1129;
   padding: 2rem;
   border-radius: 1rem;
   display: flex;
@@ -11,7 +11,7 @@
 }
 
 .search p {
-  color: #111;
+  color: #f8f9fa;
   font-weight: 600;
   font-size: bold;
 }
