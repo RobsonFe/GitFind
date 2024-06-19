@@ -7,7 +7,7 @@ function App() {
     <div className={style.app}>
       <SidebarComponent />
       <div className={style.content}>
-        <h1>GitHub Finder RepoSitory</h1>
+        <h1>Git Find</h1>
         <Outlet />
       </div>
     </div>

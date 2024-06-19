@@ -58,22 +58,35 @@ const SidebarComponent: React.FC = () => {
           <MenuItem icon={<FaHome />}>
             <Link to="/">Home</Link>
           </MenuItem>
-          <MenuItem
-            icon={<FaFileAlt />}
-            href="https://docs.google.com/document/d/1sJYW5UXxLzkvIRNNnHhB_5-hjAkC1VTUuxFlkv4MJc8/edit?usp=sharing"
-            target="_blank"
-          >
-            Documentação
-          </MenuItem>
+          <SubMenu icon={<FaFileAlt />} label="Documentos">
+            <MenuItem
+              icon={<FaFileAlt />}
+              href="https://docs.google.com/document/d/1sJYW5UXxLzkvIRNNnHhB_5-hjAkC1VTUuxFlkv4MJc8/edit?usp=sharing"
+              target="_blank"
+            >
+              Instruções
+            </MenuItem>
+            <MenuItem
+              icon={<FaFileAlt />}
+              href="https://docs.google.com/document/d/1rg0E-S7HjE9chbFbpI8EiZ7bWL2m900FQOHwCWXqAyA/edit?usp=sharing"
+              target="_blank"
+            >
+              Documentação
+            </MenuItem>
+          </SubMenu>
           <SubMenu label="GitHub" icon={<FaGithub />}>
             <MenuItem
               icon={<FaGithub />}
               href="https://github.com/RobsonFe"
               target="_blank"
             >
-              Robson Ferreira
+              Autor
             </MenuItem>
-            <MenuItem icon={<FaGithub />} href="" target="_blank">
+            <MenuItem
+              icon={<FaGithub />}
+              href="https://github.com/RobsonFe/GitFind"
+              target="_blank"
+            >
               Repositório
             </MenuItem>
           </SubMenu>
