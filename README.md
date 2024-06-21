@@ -6,6 +6,11 @@
 - Aplicação Front-End com React e Redux utilizando GraphQL.
 - Autor: Robson Ferreira.
 
+## Aplicação em Deploy
+
+- [Vercel](https://git-find-five.vercel.app/)
+- [Netlify](https://githubfindts.netlify.app/)
+
 ### Visão Geral do Projeto
 
 O Git Find é um aplicativo web desenvolvido em React com GraphQL, utilizando a API pública do GitHub para buscar informações de perfil de usuários. O estado global da aplicação é gerenciado pelo Redux, proporcionando uma experiência dinâmica e eficiente.
