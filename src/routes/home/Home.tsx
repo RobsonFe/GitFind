@@ -26,11 +26,11 @@ const Home = () => {
       return;
     }
 
-    const { avatar_url, login, name, location, bio, followers, following } =
+    const { avatarUrl, login, name, location, bio, followers, following } =
       data;
 
     const userData: UserProps = {
-      avatar_url,
+      avatarUrl,
       login,
       name,
       location,

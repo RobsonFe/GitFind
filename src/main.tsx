@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import App from "./App";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./routes/home/Home";
-import Repos from "./routes/repo/Repos.tsx";
+import Repos from "./routes/repo/Repos";
 import { Provider } from "react-redux";
-import store from "./context/store/index.ts";
+import store from "./context/store/index";
 import { ApolloProvider } from "@apollo/client";
-import { client } from "./provider/cliente.ts";
+import { client } from "./provider/cliente";
 
 const router = createBrowserRouter([
   {
@@ -33,9 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <RouterProvider router={router}>
-          <App />
-        </RouterProvider>
+        <RouterProvider router={router} />
       </Provider>
     </ApolloProvider>
   </React.StrictMode>
