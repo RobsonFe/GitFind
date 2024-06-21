@@ -25,8 +25,12 @@ const SidebarComponent: React.FC = () => {
     setCollapsed(!collapsed);
   };
 
+  interface MenuItemStyleProps {
+    active: boolean;
+  }
+
   const menuItemStyles = {
-    button: ({ level, active }) => ({
+    button: ({ active }: MenuItemStyleProps) => ({
       backgroundColor: active ? "#0e1129" : undefined,
       color: active ? "white" : undefined,
       "&:hover": {
