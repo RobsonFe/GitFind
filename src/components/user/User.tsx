@@ -4,8 +4,9 @@ import style from "./User.module.css";
 import { FaComputer } from "react-icons/fa6";
 import { useQuery } from "@apollo/client";
 import { GET_USER_DETAILS } from "../../provider/query";
+import { UserProps } from "../../types/user";
 
-const User: React.FC = () => {
+const User: React.FC<UserProps> = () => {
   const { data, loading, error } = useQuery(GET_USER_DETAILS);
 
   if (loading) return <p>Loading...</p>;
