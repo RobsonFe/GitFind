@@ -19,7 +19,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const SidebarComponent: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -45,6 +45,7 @@ const SidebarComponent: React.FC = () => {
     label: {
       color: "white",
     },
+    breakPoint: {},
   };
 
   return (
