@@ -12,7 +12,7 @@ const Repos = () => {
   const { username } = useParams<{ username: string }>();
   const [repos, setRepos] = useState<RepoProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 2;
+  const perPage = 1;
 
   const { data, loading, error, fetchMore } = useQuery(GET_USER_REPOS, {
     variables: { username, perPage, cursor: null },

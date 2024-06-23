@@ -6,13 +6,19 @@ import { useQuery } from "@apollo/client";
 import { GET_USER_DETAILS } from "../../provider/query";
 import { UserProps } from "../../types/user";
 
-const User: React.FC<UserProps> = () => {
-  const { data, loading, error } = useQuery(GET_USER_DETAILS);
+interface UserComponentProps extends UserProps {
+  login: string;
+}
+
+const User: React.FC<UserComponentProps> = ({ login }) => {
+  const { data, loading, error } = useQuery(GET_USER_DETAILS, {
+    variables: { login },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const user = data.viewer;
+  const user = data.user;
 
   return (
     <div className={style.user}>
