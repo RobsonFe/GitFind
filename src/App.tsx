@@ -9,7 +9,9 @@ function App() {
         <SidebarBComponent />
       </div>
       <div className={style.content}>
-        <h1>Git Find</h1>
+        <h1 className="h1">
+          <strong>Git Find</strong>
+        </h1>
         <Outlet />
       </div>
     </div>

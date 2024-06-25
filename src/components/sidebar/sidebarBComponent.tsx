@@ -10,6 +10,7 @@ import {
   FaInstagram,
   FaLinkedin,
 } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const SidebarBComponent: React.FC = () => {
   return (
@@ -31,7 +32,7 @@ const SidebarBComponent: React.FC = () => {
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <GiHamburgerMenu />
         </button>
         <div
           className="offcanvas offcanvas-end"

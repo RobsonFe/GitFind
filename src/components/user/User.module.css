@@ -56,10 +56,12 @@
 .user a {
   text-align: center;
   background-color: #644aff;
+  color: #f8f9fa;
   padding: 1rem;
   border-radius: 5px;
   opacity: 0.8;
   transition: 0.3s;
+  font-weight: bold;
 }
 
 .user a:hover {
