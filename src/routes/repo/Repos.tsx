@@ -76,7 +76,9 @@ const Repos = () => {
   return (
     <div className={style.repos}>
       <BackBtn />
-      <h2>Repositórios do Usuário: {username}</h2>
+      <h2>
+        Repositórios do Usuário: <strong>{username}</strong>
+      </h2>
       {repos.length === 0 && (
         <p>
           Usuário <strong>{username}</strong> Não Possui Repositórios

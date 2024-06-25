@@ -38,10 +38,11 @@
 .pageBtn {
   padding: 10px 20px;
   background-color: #0e1129;
-  color: white;
+  color: #f8f9fa;
   border: none;
   cursor: pointer;
   font-size: 16px;
+  border-radius: 8px;
 }
 
 .pageBtn:disabled {
