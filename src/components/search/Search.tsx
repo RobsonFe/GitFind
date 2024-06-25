@@ -1,6 +1,7 @@
 import { useState, KeyboardEvent } from "react";
 import { BsSearch } from "react-icons/bs";
 import style from "./Search.module.css";
+import Greetings from "../greetings/Greetings";
 
 type SearchProps = {
   loadUser: (userName: string) => Promise<void>;
@@ -30,6 +31,7 @@ const Search = ({ loadUser }: SearchProps) => {
           <BsSearch />
         </button>
       </div>
+      <Greetings />
     </div>
   );
 };

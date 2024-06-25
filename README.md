@@ -35,6 +35,7 @@ Certifique-se de ter o Node.js instalado. Caso não tenha, você pode baixá-lo 
 - TypeScript
 - HTML
 - SCSS
+- Bootstrap
 - Redux
 - GraphQL
 - React Modal
@@ -117,6 +118,12 @@ Certifique-se de ter o Node.js instalado. Caso não tenha, você pode baixá-lo 
 12. **Autenticação**
 
     É necessário gerar uma autenticação do GitHub para utilização da API e configurar no sistema.
+
+13. **Bootstrap**
+
+    ```bash
+    npm i bootstrap
+    ```
 
 ### Como Gerar Autenticação para utilizar a API com GraphQL
 

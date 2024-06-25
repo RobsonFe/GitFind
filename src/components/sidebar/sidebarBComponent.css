@@ -1,0 +1,21 @@
+.navMenu {
+  background-color: #0e1129;
+}
+
+a:hover {
+  color: #212529;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:active,
+.navbar .nav-link:focus,
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:active,
+.navbar .dropdown-item:focus {
+  cursor: pointer;
+  color: #212529 !important;
+}
+
+.navbar-toggler-icon {
+  color: #f8f9fa !important;
+}
