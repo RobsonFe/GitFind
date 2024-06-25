@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import style from "./App.module.css";
 import SidebarBComponent from "./components/sidebar/sidebarBComponent";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         </h1>
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 }
